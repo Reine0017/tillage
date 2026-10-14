@@ -8,7 +8,8 @@ memory live on the nodes that own them, scoped by their place in the tree.
 
 Local-only: everything lives on your machine in `~/.tillage`, and this release
 makes no network calls — cloud sync returns in a later release. Website:
-[tillagemap.com](https://tillagemap.com).
+[tillagemap.com](https://tillagemap.com). More information on
+<https://tillagemap.com/guide>.
 
 Readable code: the plugin ships its built files unminified, so you can read
 what runs on your machine, under the Functional Source License
