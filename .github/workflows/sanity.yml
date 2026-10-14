@@ -1,0 +1,20 @@
+name: sanity
+on: [push]
+jobs:
+  sanity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Manifests parse and agree
+        run: |
+          jq empty .claude-plugin/marketplace.json
+          jq empty tillage/.claude-plugin/plugin.json
+          jq -e '.name == "tillage"' .claude-plugin/marketplace.json
+          MKT=$(jq -r '.plugins[] | select(.name=="tillage") | .version' .claude-plugin/marketplace.json)
+          PLG=$(jq -r '.version' tillage/.claude-plugin/plugin.json)
+          test -n "$MKT" && test "$MKT" = "$PLG"
+      - name: Bundle present, no sourcemaps anywhere
+        run: |
+          test -f tillage/dist/tillage.mjs
+          MAPS=$(find . -name '*.map' -not -path './.git/*')
+          if [ -n "$MAPS" ]; then echo "sourcemap files present:"; echo "$MAPS"; exit 1; fi

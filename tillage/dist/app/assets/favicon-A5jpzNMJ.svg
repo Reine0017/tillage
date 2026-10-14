@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Tillage</title>
+  <style>svg{color:#2a2c2a}@media (prefers-color-scheme: dark){svg{color:#efe7d8}}</style>
+  <path d="M12 14a8 8 0 0 1 16 0Z" fill="#f2b544"/>
+  <path d="M2 16H30V20H2ZM2 24H22V28H2Z" fill="currentColor"/>
+</svg>

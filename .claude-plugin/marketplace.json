@@ -1,0 +1,15 @@
+{
+  "name": "tillage",
+  "description": "Tillage — an agent-native project map for Claude Code. The map is your project's context source of record; this marketplace ships the plugin that connects your agent to it.",
+  "owner": {
+    "name": "Reine0017"
+  },
+  "plugins": [
+    {
+      "name": "tillage",
+      "source": "./tillage",
+      "description": "Connect your agent to a project map — the single context source for rules, decisions, briefs, memory and tasks; bundles the map skill and the local MCP server.",
+      "version": "0.16.0"
+    }
+  ]
+}

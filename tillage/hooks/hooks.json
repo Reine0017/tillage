@@ -1,0 +1,25 @@
+{
+  "description": "Tillage: facts at the moments they matter; nothing here blocks an edit.",
+  "hooks": {
+    "SessionStart": [{ "matcher": "startup|resume|clear|compact", "hooks": [{ "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "session-start"], "timeout": 15 }] }],
+    "UserPromptSubmit": [{ "hooks": [{ "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "prompt"], "timeout": 5 }] }],
+    "PreToolUse": [
+      { "matcher": "mcp__plugin_tillage_tillage__.*", "hooks": [{ "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "pre-map-call"], "timeout": 5 }] },
+      { "matcher": "^(Agent|Task)$", "hooks": [{ "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "lead-folder"], "timeout": 5 }] },
+      { "matcher": "^(Write|Edit)$", "hooks": [{ "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "pre-file-write"], "timeout": 5 }] },
+      { "matcher": "^Bash$", "hooks": [
+        { "type": "command", "if": "Bash(git commit *)", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "pre-shell"], "timeout": 5 },
+        { "type": "command", "if": "Bash(git * commit *)", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "pre-shell"], "timeout": 5 }
+      ] }
+    ],
+    "PostToolUse": [
+      { "matcher": "^(EnterWorktree|ExitWorktree)$", "hooks": [{ "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "lead-folder"], "timeout": 5 }] },
+      { "matcher": "^Bash$", "hooks": [
+        { "type": "command", "if": "Bash(git commit *)", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "post-shell"], "timeout": 5 },
+        { "type": "command", "if": "Bash(git * commit *)", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "post-shell"], "timeout": 5 }
+      ] },
+      { "matcher": "mcp__plugin_tillage_tillage__.*", "hooks": [{ "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "post-map-write"], "timeout": 5 }] }
+    ],
+    "Stop": [{ "hooks": [{ "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/dist/tillage.mjs", "hook", "stop"], "timeout": 15 }] }]
+  }
+}

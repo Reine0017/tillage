@@ -1,0 +1,10 @@
+{
+  "name": "tillage",
+  "displayName": "Tillage",
+  "version": "0.16.0",
+  "description": "Connect your agent to a Tillage project map — the map is the single context source. Bundles the map skill and the local tillage MCP server so one install works in the terminal and the desktop app.",
+  "author": {
+    "name": "Tillage"
+  },
+  "keywords": ["project-map", "mindmap", "planner", "project-management", "context", "mcp"]
+}
